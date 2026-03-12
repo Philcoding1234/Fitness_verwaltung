@@ -30,7 +30,7 @@ namespace Fitness_verwaltung
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            
             // 1. Bei einem gesuchten Mitglied können die Mitgliedschaftsarten verwaltet werden - Phil
             List<tbl_mitgliedschaft> gefunden = new List<tbl_mitgliedschaft>();
 
