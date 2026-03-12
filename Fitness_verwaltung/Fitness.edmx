@@ -1,0 +1,780 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FitnessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_checkin">
+          <Key>
+            <PropertyRef Name="PK_Checkin" />
+          </Key>
+          <Property Name="PK_Checkin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Zeitpunkt" Type="datetime" />
+          <Property Name="FK_Mitglied" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_geraet">
+          <Key>
+            <PropertyRef Name="PK_Geraet" />
+          </Key>
+          <Property Name="PK_Geraet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bezeichnung" Type="varchar" MaxLength="50" />
+          <Property Name="Kategorie" Type="varchar" MaxLength="50" />
+          <Property Name="FK_Raum" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_kursbuchung">
+          <Key>
+            <PropertyRef Name="PK_Buchung" />
+          </Key>
+          <Property Name="PK_Buchung" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Buchungsdatum" Type="datetime" />
+          <Property Name="FK_Mitglied" Type="int" />
+          <Property Name="FK_Kurs" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_kurse">
+          <Key>
+            <PropertyRef Name="PK_Kurs" />
+          </Key>
+          <Property Name="PK_Kurs" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titel" Type="varchar" MaxLength="50" />
+          <Property Name="Beschreibung" Type="varchar" MaxLength="50" />
+          <Property Name="Startzeit" Type="datetime" />
+          <Property Name="Endzeit" Type="datetime" />
+          <Property Name="FK_Trainer" Type="int" />
+          <Property Name="FK_Raum" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_mitglieder">
+          <Key>
+            <PropertyRef Name="PK_Mitglied" />
+          </Key>
+          <Property Name="PK_Mitglied" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vorname" Type="varchar" MaxLength="50" />
+          <Property Name="Nachname" Type="varchar" MaxLength="50" />
+          <Property Name="Geburtsdatum" Type="date" />
+          <Property Name="Telefon" Type="int" />
+          <Property Name="Adresse" Type="varchar" MaxLength="50" />
+          <Property Name="FK_Mitgliedschaft" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_mitgliedschaft">
+          <Key>
+            <PropertyRef Name="PK_Mitgliedschaft" />
+          </Key>
+          <Property Name="PK_Mitgliedschaft" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bezeichnung" Type="varchar" MaxLength="50" />
+          <Property Name="Preis" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="Start_Zeit" Type="date" />
+          <Property Name="End_Zeit" Type="date" />
+        </EntityType>
+        <EntityType Name="tbl_raum">
+          <Key>
+            <PropertyRef Name="PK_Raum" />
+          </Key>
+          <Property Name="PK_Raum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bezeichnung" Type="varchar" MaxLength="50" />
+          <Property Name="Bereich" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_trainer">
+          <Key>
+            <PropertyRef Name="PK_Trainer" />
+          </Key>
+          <Property Name="PK_Trainer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vorname" Type="varchar" MaxLength="50" />
+          <Property Name="Nachname" Type="varchar" MaxLength="50" />
+          <Property Name="Adresse" Type="varchar" MaxLength="50" />
+          <Property Name="Telefon" Type="int" />
+          <Property Name="Spezialisierung" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_trainingsplan">
+          <Key>
+            <PropertyRef Name="PK_Trainingsplan" />
+          </Key>
+          <Property Name="PK_Trainingsplan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Beschreibung" Type="varchar" MaxLength="50" />
+          <Property Name="Startdatum" Type="datetime" />
+          <Property Name="Enddatum" Type="datetime" />
+          <Property Name="FK_Mitglied" Type="int" />
+          <Property Name="FK_Trainer" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_wartung">
+          <Key>
+            <PropertyRef Name="PK_Wartung" />
+          </Key>
+          <Property Name="PK_Wartung" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Datum" Type="datetime" />
+          <Property Name="Bemerkung" Type="varchar" MaxLength="50" />
+          <Property Name="FK_Geraet" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_zahlung">
+          <Key>
+            <PropertyRef Name="PK_Zahlung" />
+          </Key>
+          <Property Name="PK_Zahlung" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Datum" Type="datetime" />
+          <Property Name="Betrag" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="Zahlungsart" Type="varchar" MaxLength="50" />
+          <Property Name="FK_Mitglied" Type="int" />
+        </EntityType>
+        <Association Name="FK__tbl_check__FK_Mi__5070F446">
+          <End Role="tbl_mitglieder" Type="Self.tbl_mitglieder" Multiplicity="0..1" />
+          <End Role="tbl_checkin" Type="Self.tbl_checkin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mitglieder">
+              <PropertyRef Name="PK_Mitglied" />
+            </Principal>
+            <Dependent Role="tbl_checkin">
+              <PropertyRef Name="FK_Mitglied" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_gerae__FK_Ra__3F466844">
+          <End Role="tbl_raum" Type="Self.tbl_raum" Multiplicity="0..1" />
+          <End Role="tbl_geraet" Type="Self.tbl_geraet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_raum">
+              <PropertyRef Name="PK_Raum" />
+            </Principal>
+            <Dependent Role="tbl_geraet">
+              <PropertyRef Name="FK_Raum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_kursb__FK_Ku__49C3F6B7">
+          <End Role="tbl_kurse" Type="Self.tbl_kurse" Multiplicity="0..1" />
+          <End Role="tbl_kursbuchung" Type="Self.tbl_kursbuchung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_kurse">
+              <PropertyRef Name="PK_Kurs" />
+            </Principal>
+            <Dependent Role="tbl_kursbuchung">
+              <PropertyRef Name="FK_Kurs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_kursb__FK_Mi__48CFD27E">
+          <End Role="tbl_mitglieder" Type="Self.tbl_mitglieder" Multiplicity="0..1" />
+          <End Role="tbl_kursbuchung" Type="Self.tbl_kursbuchung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mitglieder">
+              <PropertyRef Name="PK_Mitglied" />
+            </Principal>
+            <Dependent Role="tbl_kursbuchung">
+              <PropertyRef Name="FK_Mitglied" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_kurse__FK_Ra__45F365D3">
+          <End Role="tbl_raum" Type="Self.tbl_raum" Multiplicity="0..1" />
+          <End Role="tbl_kurse" Type="Self.tbl_kurse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_raum">
+              <PropertyRef Name="PK_Raum" />
+            </Principal>
+            <Dependent Role="tbl_kurse">
+              <PropertyRef Name="FK_Raum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_kurse__FK_Tr__44FF419A">
+          <End Role="tbl_trainer" Type="Self.tbl_trainer" Multiplicity="0..1" />
+          <End Role="tbl_kurse" Type="Self.tbl_kurse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_trainer">
+              <PropertyRef Name="PK_Trainer" />
+            </Principal>
+            <Dependent Role="tbl_kurse">
+              <PropertyRef Name="FK_Trainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_mitgl__FK_Mi__38996AB5">
+          <End Role="tbl_mitgliedschaft" Type="Self.tbl_mitgliedschaft" Multiplicity="0..1" />
+          <End Role="tbl_mitglieder" Type="Self.tbl_mitglieder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mitgliedschaft">
+              <PropertyRef Name="PK_Mitgliedschaft" />
+            </Principal>
+            <Dependent Role="tbl_mitglieder">
+              <PropertyRef Name="FK_Mitgliedschaft" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_train__FK_Mi__4CA06362">
+          <End Role="tbl_mitglieder" Type="Self.tbl_mitglieder" Multiplicity="0..1" />
+          <End Role="tbl_trainingsplan" Type="Self.tbl_trainingsplan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mitglieder">
+              <PropertyRef Name="PK_Mitglied" />
+            </Principal>
+            <Dependent Role="tbl_trainingsplan">
+              <PropertyRef Name="FK_Mitglied" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_train__FK_Tr__4D94879B">
+          <End Role="tbl_trainer" Type="Self.tbl_trainer" Multiplicity="0..1" />
+          <End Role="tbl_trainingsplan" Type="Self.tbl_trainingsplan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_trainer">
+              <PropertyRef Name="PK_Trainer" />
+            </Principal>
+            <Dependent Role="tbl_trainingsplan">
+              <PropertyRef Name="FK_Trainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_wartu__FK_Ge__4222D4EF">
+          <End Role="tbl_geraet" Type="Self.tbl_geraet" Multiplicity="0..1" />
+          <End Role="tbl_wartung" Type="Self.tbl_wartung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_geraet">
+              <PropertyRef Name="PK_Geraet" />
+            </Principal>
+            <Dependent Role="tbl_wartung">
+              <PropertyRef Name="FK_Geraet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_zahlu__FK_Mi__534D60F1">
+          <End Role="tbl_mitglieder" Type="Self.tbl_mitglieder" Multiplicity="0..1" />
+          <End Role="tbl_zahlung" Type="Self.tbl_zahlung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mitglieder">
+              <PropertyRef Name="PK_Mitglied" />
+            </Principal>
+            <Dependent Role="tbl_zahlung">
+              <PropertyRef Name="FK_Mitglied" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FitnessModelStoreContainer">
+          <EntitySet Name="tbl_checkin" EntityType="Self.tbl_checkin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_geraet" EntityType="Self.tbl_geraet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_kursbuchung" EntityType="Self.tbl_kursbuchung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_kurse" EntityType="Self.tbl_kurse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_mitglieder" EntityType="Self.tbl_mitglieder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_mitgliedschaft" EntityType="Self.tbl_mitgliedschaft" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_raum" EntityType="Self.tbl_raum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_trainer" EntityType="Self.tbl_trainer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_trainingsplan" EntityType="Self.tbl_trainingsplan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_wartung" EntityType="Self.tbl_wartung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_zahlung" EntityType="Self.tbl_zahlung" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tbl_check__FK_Mi__5070F446" Association="Self.FK__tbl_check__FK_Mi__5070F446">
+            <End Role="tbl_mitglieder" EntitySet="tbl_mitglieder" />
+            <End Role="tbl_checkin" EntitySet="tbl_checkin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_gerae__FK_Ra__3F466844" Association="Self.FK__tbl_gerae__FK_Ra__3F466844">
+            <End Role="tbl_raum" EntitySet="tbl_raum" />
+            <End Role="tbl_geraet" EntitySet="tbl_geraet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_kursb__FK_Ku__49C3F6B7" Association="Self.FK__tbl_kursb__FK_Ku__49C3F6B7">
+            <End Role="tbl_kurse" EntitySet="tbl_kurse" />
+            <End Role="tbl_kursbuchung" EntitySet="tbl_kursbuchung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_kursb__FK_Mi__48CFD27E" Association="Self.FK__tbl_kursb__FK_Mi__48CFD27E">
+            <End Role="tbl_mitglieder" EntitySet="tbl_mitglieder" />
+            <End Role="tbl_kursbuchung" EntitySet="tbl_kursbuchung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_kurse__FK_Ra__45F365D3" Association="Self.FK__tbl_kurse__FK_Ra__45F365D3">
+            <End Role="tbl_raum" EntitySet="tbl_raum" />
+            <End Role="tbl_kurse" EntitySet="tbl_kurse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_kurse__FK_Tr__44FF419A" Association="Self.FK__tbl_kurse__FK_Tr__44FF419A">
+            <End Role="tbl_trainer" EntitySet="tbl_trainer" />
+            <End Role="tbl_kurse" EntitySet="tbl_kurse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_mitgl__FK_Mi__38996AB5" Association="Self.FK__tbl_mitgl__FK_Mi__38996AB5">
+            <End Role="tbl_mitgliedschaft" EntitySet="tbl_mitgliedschaft" />
+            <End Role="tbl_mitglieder" EntitySet="tbl_mitglieder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_train__FK_Mi__4CA06362" Association="Self.FK__tbl_train__FK_Mi__4CA06362">
+            <End Role="tbl_mitglieder" EntitySet="tbl_mitglieder" />
+            <End Role="tbl_trainingsplan" EntitySet="tbl_trainingsplan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_train__FK_Tr__4D94879B" Association="Self.FK__tbl_train__FK_Tr__4D94879B">
+            <End Role="tbl_trainer" EntitySet="tbl_trainer" />
+            <End Role="tbl_trainingsplan" EntitySet="tbl_trainingsplan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_wartu__FK_Ge__4222D4EF" Association="Self.FK__tbl_wartu__FK_Ge__4222D4EF">
+            <End Role="tbl_geraet" EntitySet="tbl_geraet" />
+            <End Role="tbl_wartung" EntitySet="tbl_wartung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_zahlu__FK_Mi__534D60F1" Association="Self.FK__tbl_zahlu__FK_Mi__534D60F1">
+            <End Role="tbl_mitglieder" EntitySet="tbl_mitglieder" />
+            <End Role="tbl_zahlung" EntitySet="tbl_zahlung" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FitnessModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_checkin">
+          <Key>
+            <PropertyRef Name="PK_Checkin" />
+          </Key>
+          <Property Name="PK_Checkin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Zeitpunkt" Type="DateTime" Precision="3" />
+          <Property Name="FK_Mitglied" Type="Int32" />
+          <NavigationProperty Name="tbl_mitglieder" Relationship="Self.FK__tbl_check__FK_Mi__5070F446" FromRole="tbl_checkin" ToRole="tbl_mitglieder" />
+        </EntityType>
+        <EntityType Name="tbl_geraet">
+          <Key>
+            <PropertyRef Name="PK_Geraet" />
+          </Key>
+          <Property Name="PK_Geraet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Kategorie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Raum" Type="Int32" />
+          <NavigationProperty Name="tbl_raum" Relationship="Self.FK__tbl_gerae__FK_Ra__3F466844" FromRole="tbl_geraet" ToRole="tbl_raum" />
+          <NavigationProperty Name="tbl_wartung" Relationship="Self.FK__tbl_wartu__FK_Ge__4222D4EF" FromRole="tbl_geraet" ToRole="tbl_wartung" />
+        </EntityType>
+        <EntityType Name="tbl_kursbuchung">
+          <Key>
+            <PropertyRef Name="PK_Buchung" />
+          </Key>
+          <Property Name="PK_Buchung" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Buchungsdatum" Type="DateTime" Precision="3" />
+          <Property Name="FK_Mitglied" Type="Int32" />
+          <Property Name="FK_Kurs" Type="Int32" />
+          <NavigationProperty Name="tbl_kurse" Relationship="Self.FK__tbl_kursb__FK_Ku__49C3F6B7" FromRole="tbl_kursbuchung" ToRole="tbl_kurse" />
+          <NavigationProperty Name="tbl_mitglieder" Relationship="Self.FK__tbl_kursb__FK_Mi__48CFD27E" FromRole="tbl_kursbuchung" ToRole="tbl_mitglieder" />
+        </EntityType>
+        <EntityType Name="tbl_kurse">
+          <Key>
+            <PropertyRef Name="PK_Kurs" />
+          </Key>
+          <Property Name="PK_Kurs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Beschreibung" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Startzeit" Type="DateTime" Precision="3" />
+          <Property Name="Endzeit" Type="DateTime" Precision="3" />
+          <Property Name="FK_Trainer" Type="Int32" />
+          <Property Name="FK_Raum" Type="Int32" />
+          <NavigationProperty Name="tbl_kursbuchung" Relationship="Self.FK__tbl_kursb__FK_Ku__49C3F6B7" FromRole="tbl_kurse" ToRole="tbl_kursbuchung" />
+          <NavigationProperty Name="tbl_raum" Relationship="Self.FK__tbl_kurse__FK_Ra__45F365D3" FromRole="tbl_kurse" ToRole="tbl_raum" />
+          <NavigationProperty Name="tbl_trainer" Relationship="Self.FK__tbl_kurse__FK_Tr__44FF419A" FromRole="tbl_kurse" ToRole="tbl_trainer" />
+        </EntityType>
+        <EntityType Name="tbl_mitglieder">
+          <Key>
+            <PropertyRef Name="PK_Mitglied" />
+          </Key>
+          <Property Name="PK_Mitglied" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nachname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Geburtsdatum" Type="DateTime" Precision="0" />
+          <Property Name="Telefon" Type="Int32" />
+          <Property Name="Adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Mitgliedschaft" Type="Int32" />
+          <NavigationProperty Name="tbl_checkin" Relationship="Self.FK__tbl_check__FK_Mi__5070F446" FromRole="tbl_mitglieder" ToRole="tbl_checkin" />
+          <NavigationProperty Name="tbl_kursbuchung" Relationship="Self.FK__tbl_kursb__FK_Mi__48CFD27E" FromRole="tbl_mitglieder" ToRole="tbl_kursbuchung" />
+          <NavigationProperty Name="tbl_mitgliedschaft" Relationship="Self.FK__tbl_mitgl__FK_Mi__38996AB5" FromRole="tbl_mitglieder" ToRole="tbl_mitgliedschaft" />
+          <NavigationProperty Name="tbl_trainingsplan" Relationship="Self.FK__tbl_train__FK_Mi__4CA06362" FromRole="tbl_mitglieder" ToRole="tbl_trainingsplan" />
+          <NavigationProperty Name="tbl_zahlung" Relationship="Self.FK__tbl_zahlu__FK_Mi__534D60F1" FromRole="tbl_mitglieder" ToRole="tbl_zahlung" />
+        </EntityType>
+        <EntityType Name="tbl_mitgliedschaft">
+          <Key>
+            <PropertyRef Name="PK_Mitgliedschaft" />
+          </Key>
+          <Property Name="PK_Mitgliedschaft" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Preis" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="Start_Zeit" Type="DateTime" Precision="0" />
+          <Property Name="End_Zeit" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tbl_mitglieder" Relationship="Self.FK__tbl_mitgl__FK_Mi__38996AB5" FromRole="tbl_mitgliedschaft" ToRole="tbl_mitglieder" />
+        </EntityType>
+        <EntityType Name="tbl_raum">
+          <Key>
+            <PropertyRef Name="PK_Raum" />
+          </Key>
+          <Property Name="PK_Raum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bereich" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_geraet" Relationship="Self.FK__tbl_gerae__FK_Ra__3F466844" FromRole="tbl_raum" ToRole="tbl_geraet" />
+          <NavigationProperty Name="tbl_kurse" Relationship="Self.FK__tbl_kurse__FK_Ra__45F365D3" FromRole="tbl_raum" ToRole="tbl_kurse" />
+        </EntityType>
+        <EntityType Name="tbl_trainer">
+          <Key>
+            <PropertyRef Name="PK_Trainer" />
+          </Key>
+          <Property Name="PK_Trainer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nachname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="Int32" />
+          <Property Name="Spezialisierung" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_kurse" Relationship="Self.FK__tbl_kurse__FK_Tr__44FF419A" FromRole="tbl_trainer" ToRole="tbl_kurse" />
+          <NavigationProperty Name="tbl_trainingsplan" Relationship="Self.FK__tbl_train__FK_Tr__4D94879B" FromRole="tbl_trainer" ToRole="tbl_trainingsplan" />
+        </EntityType>
+        <EntityType Name="tbl_trainingsplan">
+          <Key>
+            <PropertyRef Name="PK_Trainingsplan" />
+          </Key>
+          <Property Name="PK_Trainingsplan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Beschreibung" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Startdatum" Type="DateTime" Precision="3" />
+          <Property Name="Enddatum" Type="DateTime" Precision="3" />
+          <Property Name="FK_Mitglied" Type="Int32" />
+          <Property Name="FK_Trainer" Type="Int32" />
+          <NavigationProperty Name="tbl_mitglieder" Relationship="Self.FK__tbl_train__FK_Mi__4CA06362" FromRole="tbl_trainingsplan" ToRole="tbl_mitglieder" />
+          <NavigationProperty Name="tbl_trainer" Relationship="Self.FK__tbl_train__FK_Tr__4D94879B" FromRole="tbl_trainingsplan" ToRole="tbl_trainer" />
+        </EntityType>
+        <EntityType Name="tbl_wartung">
+          <Key>
+            <PropertyRef Name="PK_Wartung" />
+          </Key>
+          <Property Name="PK_Wartung" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Datum" Type="DateTime" Precision="3" />
+          <Property Name="Bemerkung" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Geraet" Type="Int32" />
+          <NavigationProperty Name="tbl_geraet" Relationship="Self.FK__tbl_wartu__FK_Ge__4222D4EF" FromRole="tbl_wartung" ToRole="tbl_geraet" />
+        </EntityType>
+        <EntityType Name="tbl_zahlung">
+          <Key>
+            <PropertyRef Name="PK_Zahlung" />
+          </Key>
+          <Property Name="PK_Zahlung" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Datum" Type="DateTime" Precision="3" />
+          <Property Name="Betrag" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="Zahlungsart" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Mitglied" Type="Int32" />
+          <NavigationProperty Name="tbl_mitglieder" Relationship="Self.FK__tbl_zahlu__FK_Mi__534D60F1" FromRole="tbl_zahlung" ToRole="tbl_mitglieder" />
+        </EntityType>
+        <Association Name="FK__tbl_check__FK_Mi__5070F446">
+          <End Role="tbl_mitglieder" Type="Self.tbl_mitglieder" Multiplicity="0..1" />
+          <End Role="tbl_checkin" Type="Self.tbl_checkin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mitglieder">
+              <PropertyRef Name="PK_Mitglied" />
+            </Principal>
+            <Dependent Role="tbl_checkin">
+              <PropertyRef Name="FK_Mitglied" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_gerae__FK_Ra__3F466844">
+          <End Role="tbl_raum" Type="Self.tbl_raum" Multiplicity="0..1" />
+          <End Role="tbl_geraet" Type="Self.tbl_geraet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_raum">
+              <PropertyRef Name="PK_Raum" />
+            </Principal>
+            <Dependent Role="tbl_geraet">
+              <PropertyRef Name="FK_Raum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_wartu__FK_Ge__4222D4EF">
+          <End Role="tbl_geraet" Type="Self.tbl_geraet" Multiplicity="0..1" />
+          <End Role="tbl_wartung" Type="Self.tbl_wartung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_geraet">
+              <PropertyRef Name="PK_Geraet" />
+            </Principal>
+            <Dependent Role="tbl_wartung">
+              <PropertyRef Name="FK_Geraet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_kursb__FK_Ku__49C3F6B7">
+          <End Role="tbl_kurse" Type="Self.tbl_kurse" Multiplicity="0..1" />
+          <End Role="tbl_kursbuchung" Type="Self.tbl_kursbuchung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_kurse">
+              <PropertyRef Name="PK_Kurs" />
+            </Principal>
+            <Dependent Role="tbl_kursbuchung">
+              <PropertyRef Name="FK_Kurs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_kursb__FK_Mi__48CFD27E">
+          <End Role="tbl_mitglieder" Type="Self.tbl_mitglieder" Multiplicity="0..1" />
+          <End Role="tbl_kursbuchung" Type="Self.tbl_kursbuchung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mitglieder">
+              <PropertyRef Name="PK_Mitglied" />
+            </Principal>
+            <Dependent Role="tbl_kursbuchung">
+              <PropertyRef Name="FK_Mitglied" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_kurse__FK_Ra__45F365D3">
+          <End Role="tbl_raum" Type="Self.tbl_raum" Multiplicity="0..1" />
+          <End Role="tbl_kurse" Type="Self.tbl_kurse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_raum">
+              <PropertyRef Name="PK_Raum" />
+            </Principal>
+            <Dependent Role="tbl_kurse">
+              <PropertyRef Name="FK_Raum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_kurse__FK_Tr__44FF419A">
+          <End Role="tbl_trainer" Type="Self.tbl_trainer" Multiplicity="0..1" />
+          <End Role="tbl_kurse" Type="Self.tbl_kurse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_trainer">
+              <PropertyRef Name="PK_Trainer" />
+            </Principal>
+            <Dependent Role="tbl_kurse">
+              <PropertyRef Name="FK_Trainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_mitgl__FK_Mi__38996AB5">
+          <End Role="tbl_mitgliedschaft" Type="Self.tbl_mitgliedschaft" Multiplicity="0..1" />
+          <End Role="tbl_mitglieder" Type="Self.tbl_mitglieder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mitgliedschaft">
+              <PropertyRef Name="PK_Mitgliedschaft" />
+            </Principal>
+            <Dependent Role="tbl_mitglieder">
+              <PropertyRef Name="FK_Mitgliedschaft" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_train__FK_Mi__4CA06362">
+          <End Role="tbl_mitglieder" Type="Self.tbl_mitglieder" Multiplicity="0..1" />
+          <End Role="tbl_trainingsplan" Type="Self.tbl_trainingsplan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mitglieder">
+              <PropertyRef Name="PK_Mitglied" />
+            </Principal>
+            <Dependent Role="tbl_trainingsplan">
+              <PropertyRef Name="FK_Mitglied" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_zahlu__FK_Mi__534D60F1">
+          <End Role="tbl_mitglieder" Type="Self.tbl_mitglieder" Multiplicity="0..1" />
+          <End Role="tbl_zahlung" Type="Self.tbl_zahlung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_mitglieder">
+              <PropertyRef Name="PK_Mitglied" />
+            </Principal>
+            <Dependent Role="tbl_zahlung">
+              <PropertyRef Name="FK_Mitglied" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_train__FK_Tr__4D94879B">
+          <End Role="tbl_trainer" Type="Self.tbl_trainer" Multiplicity="0..1" />
+          <End Role="tbl_trainingsplan" Type="Self.tbl_trainingsplan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_trainer">
+              <PropertyRef Name="PK_Trainer" />
+            </Principal>
+            <Dependent Role="tbl_trainingsplan">
+              <PropertyRef Name="FK_Trainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FitnessEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_checkin" EntityType="Self.tbl_checkin" />
+          <EntitySet Name="tbl_geraet" EntityType="Self.tbl_geraet" />
+          <EntitySet Name="tbl_kursbuchung" EntityType="Self.tbl_kursbuchung" />
+          <EntitySet Name="tbl_kurse" EntityType="Self.tbl_kurse" />
+          <EntitySet Name="tbl_mitglieder" EntityType="Self.tbl_mitglieder" />
+          <EntitySet Name="tbl_mitgliedschaft" EntityType="Self.tbl_mitgliedschaft" />
+          <EntitySet Name="tbl_raum" EntityType="Self.tbl_raum" />
+          <EntitySet Name="tbl_trainer" EntityType="Self.tbl_trainer" />
+          <EntitySet Name="tbl_trainingsplan" EntityType="Self.tbl_trainingsplan" />
+          <EntitySet Name="tbl_wartung" EntityType="Self.tbl_wartung" />
+          <EntitySet Name="tbl_zahlung" EntityType="Self.tbl_zahlung" />
+          <AssociationSet Name="FK__tbl_check__FK_Mi__5070F446" Association="Self.FK__tbl_check__FK_Mi__5070F446">
+            <End Role="tbl_mitglieder" EntitySet="tbl_mitglieder" />
+            <End Role="tbl_checkin" EntitySet="tbl_checkin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_gerae__FK_Ra__3F466844" Association="Self.FK__tbl_gerae__FK_Ra__3F466844">
+            <End Role="tbl_raum" EntitySet="tbl_raum" />
+            <End Role="tbl_geraet" EntitySet="tbl_geraet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_wartu__FK_Ge__4222D4EF" Association="Self.FK__tbl_wartu__FK_Ge__4222D4EF">
+            <End Role="tbl_geraet" EntitySet="tbl_geraet" />
+            <End Role="tbl_wartung" EntitySet="tbl_wartung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_kursb__FK_Ku__49C3F6B7" Association="Self.FK__tbl_kursb__FK_Ku__49C3F6B7">
+            <End Role="tbl_kurse" EntitySet="tbl_kurse" />
+            <End Role="tbl_kursbuchung" EntitySet="tbl_kursbuchung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_kursb__FK_Mi__48CFD27E" Association="Self.FK__tbl_kursb__FK_Mi__48CFD27E">
+            <End Role="tbl_mitglieder" EntitySet="tbl_mitglieder" />
+            <End Role="tbl_kursbuchung" EntitySet="tbl_kursbuchung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_kurse__FK_Ra__45F365D3" Association="Self.FK__tbl_kurse__FK_Ra__45F365D3">
+            <End Role="tbl_raum" EntitySet="tbl_raum" />
+            <End Role="tbl_kurse" EntitySet="tbl_kurse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_kurse__FK_Tr__44FF419A" Association="Self.FK__tbl_kurse__FK_Tr__44FF419A">
+            <End Role="tbl_trainer" EntitySet="tbl_trainer" />
+            <End Role="tbl_kurse" EntitySet="tbl_kurse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_mitgl__FK_Mi__38996AB5" Association="Self.FK__tbl_mitgl__FK_Mi__38996AB5">
+            <End Role="tbl_mitgliedschaft" EntitySet="tbl_mitgliedschaft" />
+            <End Role="tbl_mitglieder" EntitySet="tbl_mitglieder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_train__FK_Mi__4CA06362" Association="Self.FK__tbl_train__FK_Mi__4CA06362">
+            <End Role="tbl_mitglieder" EntitySet="tbl_mitglieder" />
+            <End Role="tbl_trainingsplan" EntitySet="tbl_trainingsplan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_zahlu__FK_Mi__534D60F1" Association="Self.FK__tbl_zahlu__FK_Mi__534D60F1">
+            <End Role="tbl_mitglieder" EntitySet="tbl_mitglieder" />
+            <End Role="tbl_zahlung" EntitySet="tbl_zahlung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_train__FK_Tr__4D94879B" Association="Self.FK__tbl_train__FK_Tr__4D94879B">
+            <End Role="tbl_trainer" EntitySet="tbl_trainer" />
+            <End Role="tbl_trainingsplan" EntitySet="tbl_trainingsplan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FitnessModelStoreContainer" CdmEntityContainer="FitnessEntities">
+          <EntitySetMapping Name="tbl_checkin">
+            <EntityTypeMapping TypeName="FitnessModel.tbl_checkin">
+              <MappingFragment StoreEntitySet="tbl_checkin">
+                <ScalarProperty Name="PK_Checkin" ColumnName="PK_Checkin" />
+                <ScalarProperty Name="Zeitpunkt" ColumnName="Zeitpunkt" />
+                <ScalarProperty Name="FK_Mitglied" ColumnName="FK_Mitglied" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_geraet">
+            <EntityTypeMapping TypeName="FitnessModel.tbl_geraet">
+              <MappingFragment StoreEntitySet="tbl_geraet">
+                <ScalarProperty Name="PK_Geraet" ColumnName="PK_Geraet" />
+                <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+                <ScalarProperty Name="FK_Raum" ColumnName="FK_Raum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_kursbuchung">
+            <EntityTypeMapping TypeName="FitnessModel.tbl_kursbuchung">
+              <MappingFragment StoreEntitySet="tbl_kursbuchung">
+                <ScalarProperty Name="PK_Buchung" ColumnName="PK_Buchung" />
+                <ScalarProperty Name="Buchungsdatum" ColumnName="Buchungsdatum" />
+                <ScalarProperty Name="FK_Mitglied" ColumnName="FK_Mitglied" />
+                <ScalarProperty Name="FK_Kurs" ColumnName="FK_Kurs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_kurse">
+            <EntityTypeMapping TypeName="FitnessModel.tbl_kurse">
+              <MappingFragment StoreEntitySet="tbl_kurse">
+                <ScalarProperty Name="PK_Kurs" ColumnName="PK_Kurs" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Beschreibung" ColumnName="Beschreibung" />
+                <ScalarProperty Name="Startzeit" ColumnName="Startzeit" />
+                <ScalarProperty Name="Endzeit" ColumnName="Endzeit" />
+                <ScalarProperty Name="FK_Trainer" ColumnName="FK_Trainer" />
+                <ScalarProperty Name="FK_Raum" ColumnName="FK_Raum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_mitglieder">
+            <EntityTypeMapping TypeName="FitnessModel.tbl_mitglieder">
+              <MappingFragment StoreEntitySet="tbl_mitglieder">
+                <ScalarProperty Name="PK_Mitglied" ColumnName="PK_Mitglied" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="Geburtsdatum" ColumnName="Geburtsdatum" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="FK_Mitgliedschaft" ColumnName="FK_Mitgliedschaft" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_mitgliedschaft">
+            <EntityTypeMapping TypeName="FitnessModel.tbl_mitgliedschaft">
+              <MappingFragment StoreEntitySet="tbl_mitgliedschaft">
+                <ScalarProperty Name="PK_Mitgliedschaft" ColumnName="PK_Mitgliedschaft" />
+                <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
+                <ScalarProperty Name="Preis" ColumnName="Preis" />
+                <ScalarProperty Name="Start_Zeit" ColumnName="Start_Zeit" />
+                <ScalarProperty Name="End_Zeit" ColumnName="End_Zeit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_raum">
+            <EntityTypeMapping TypeName="FitnessModel.tbl_raum">
+              <MappingFragment StoreEntitySet="tbl_raum">
+                <ScalarProperty Name="PK_Raum" ColumnName="PK_Raum" />
+                <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
+                <ScalarProperty Name="Bereich" ColumnName="Bereich" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_trainer">
+            <EntityTypeMapping TypeName="FitnessModel.tbl_trainer">
+              <MappingFragment StoreEntitySet="tbl_trainer">
+                <ScalarProperty Name="PK_Trainer" ColumnName="PK_Trainer" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Spezialisierung" ColumnName="Spezialisierung" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_trainingsplan">
+            <EntityTypeMapping TypeName="FitnessModel.tbl_trainingsplan">
+              <MappingFragment StoreEntitySet="tbl_trainingsplan">
+                <ScalarProperty Name="PK_Trainingsplan" ColumnName="PK_Trainingsplan" />
+                <ScalarProperty Name="Beschreibung" ColumnName="Beschreibung" />
+                <ScalarProperty Name="Startdatum" ColumnName="Startdatum" />
+                <ScalarProperty Name="Enddatum" ColumnName="Enddatum" />
+                <ScalarProperty Name="FK_Mitglied" ColumnName="FK_Mitglied" />
+                <ScalarProperty Name="FK_Trainer" ColumnName="FK_Trainer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_wartung">
+            <EntityTypeMapping TypeName="FitnessModel.tbl_wartung">
+              <MappingFragment StoreEntitySet="tbl_wartung">
+                <ScalarProperty Name="PK_Wartung" ColumnName="PK_Wartung" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Bemerkung" ColumnName="Bemerkung" />
+                <ScalarProperty Name="FK_Geraet" ColumnName="FK_Geraet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_zahlung">
+            <EntityTypeMapping TypeName="FitnessModel.tbl_zahlung">
+              <MappingFragment StoreEntitySet="tbl_zahlung">
+                <ScalarProperty Name="PK_Zahlung" ColumnName="PK_Zahlung" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Betrag" ColumnName="Betrag" />
+                <ScalarProperty Name="Zahlungsart" ColumnName="Zahlungsart" />
+                <ScalarProperty Name="FK_Mitglied" ColumnName="FK_Mitglied" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

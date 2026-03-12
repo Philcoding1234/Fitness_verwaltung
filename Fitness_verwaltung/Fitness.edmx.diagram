@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="827188a3dfb845d5a16c0b2e3cc1838d" Name="Diagram1" ZoomLevel="79">
+        <EntityTypeShape EntityType="FitnessModel.tbl_checkin" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessModel.tbl_geraet" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessModel.tbl_kursbuchung" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessModel.tbl_kurse" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessModel.tbl_mitglieder" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessModel.tbl_mitgliedschaft" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessModel.tbl_raum" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessModel.tbl_trainer" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessModel.tbl_trainingsplan" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessModel.tbl_wartung" Width="1.5" PointX="5.25" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessModel.tbl_zahlung" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
+        <AssociationConnector Association="FitnessModel.FK__tbl_check__FK_Mi__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessModel.FK__tbl_gerae__FK_Ra__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessModel.FK__tbl_wartu__FK_Ge__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessModel.FK__tbl_kursb__FK_Ku__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessModel.FK__tbl_kursb__FK_Mi__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessModel.FK__tbl_kurse__FK_Ra__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessModel.FK__tbl_kurse__FK_Tr__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessModel.FK__tbl_mitgl__FK_Mi__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessModel.FK__tbl_train__FK_Mi__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessModel.FK__tbl_zahlu__FK_Mi__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessModel.FK__tbl_train__FK_Tr__4D94879B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
