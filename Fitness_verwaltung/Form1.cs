@@ -27,14 +27,11 @@ namespace Fitness_verwaltung
             tbl_zahlungBindingSource.DataSource = daten.tbl_zahlung.ToList();
             tbl_mitgliederBindingSource.DataSource = daten.tbl_mitglieder.ToList();
 
-            //Das ist ein Test12
-
-            //alksudfsd
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Test2
+      
             // 1. Bei einem gesuchten Mitglied können die Mitgliedschaftsarten verwaltet werden - Phil
             List<tbl_mitgliedschaft> gefunden = new List<tbl_mitgliedschaft>();
 
